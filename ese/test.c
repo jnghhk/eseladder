@@ -3,6 +3,7 @@
 #include<time.h>
 
 int line;
+int h;
 int num;
 int **MAP;
 void verticalset()
@@ -33,38 +34,50 @@ void verticalset()
 	}
 	//마지막줄 당첨여부
 	srand(time(NULL));
-	int *boomb=(int*)malloc(sizeof(int) *(line-1));
+	int *boomb=(int*)malloc(sizeof(int) *(h));
 	
 	for(int i=0;i<num;i++)
 	{
 		boomb[i]='X';
 	}
-	for(int i=num;i<line;i++)
+	for(int i=num;i<h;i++)
 	{
 		boomb[i]='O';
 	}
+	for(int i=0;i<h;i++)
+	{
+		printf("%c",boomb[i]);
+	}
+	printf("\n");
 	int nDust,nSour,nTemp;
 	srand(time(NULL));
 	for(int i=0;i<100;i++)
 	{
-		nDust = rand()%line;
-		nSour = rand()%line;
+		nDust = rand()%h;
+		nSour = rand()%h;
 
 		nTemp = boomb[nDust];
 		boomb[nDust] = boomb[nSour];
 		boomb[nSour] = nTemp;
 	}
+	
+	for(int i=0;i<h;i++)
+	{
+		printf("%c",boomb[i]);
+	}
+	printf("\n");
+	
 	//당첨여부 넣기
+	
 	cnt=0;
-	i=22;
 	for(j=0;j<line-1;j++)
 	{	
 		if(j%2==0)
 		{
-			MAP[i][j] =boomb[cnt];
+			MAP[21][j] =boomb[cnt];
 			cnt++;
 		}
-		else MAP[i][j] = ' ';
+		else MAP[21][j] = ' ';
 	}
 		
 }
@@ -140,6 +153,7 @@ int main()
 	scanf("%d", &line);
 	printf("꽝 or 당첨 인원:");
 	scanf("%d",&num);
+	h=line;
 	line = line*2;
 	int col = 22;
 	MAP = (int **)malloc(sizeof(int*)*col);
