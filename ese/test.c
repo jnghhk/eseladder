@@ -84,15 +84,18 @@ void verticalset()
 void horizonset()
 {
 	int i, j,r,cnt=0;
+	int prev=0,cur=0;
 	srand(time(NULL));
 	for (i = 1; i < 21; i++)
 	{
 		for (j = 1; j < line-1; j+=2)
 		{
 			r=rand()%3;
-			if(r==0)
+			prev=cur;
+			cur=r;
+			if(r==0&&prev!=0)
 			{
-				int a=(22*(line-1))/3;
+				int a=(22*(line-1))/4;
 				if(cnt==a)
 				{
 					return;
