@@ -164,34 +164,48 @@ void print(int **MAP,int line)
 
 void start(int **MAP,int line)
 {
+	gotoxy(0,29);
+	printf("start");
 	char buf[128]={0,};
 
 	int i=0;
 	int j,l;
-	gotoxy(0,2);//
+//	gotoxy(0,2);//
 	for(l=0;l<line-1;l+=2)
 	{
+		gotoxy(0,29);
 		i=1;
 		j=l;
-		while(MAP[i][j]!='F'||MAP[i][j]!='P')
+		while(1)
 		{
-			gotoxy(j,i+1);
+			gotoxy(j+1,i+1);
 			sprintf(buf,"%c",MAP[i][j]);
 			printColorString(45,buf);
+			sleep(1);
 			if(MAP[i][j]=='|' && MAP[i][j+1]=='-')
 			{
-				j++;
+				j+=1;
+				gotoxy(j+1,i+1);
+				sprintf(buf,"%c",MAP[i][j]);
+				printColorString(45,buf);
+				j+=1;				
 			}
 			else if(MAP[i][j]=='|' && MAP[i][j-1]=='-')
 			{
-				j--;
+				j-=1;
+				gotoxy(j+1,i+1);
+				sprintf(buf,"%c",MAP[i][j]);
+				printColorString(45,buf);
+				j-=1;
 			}
-			else
-			{
+
+		//	else
+			//{
 				i++;
-			}
+			//}
+			if(MAP[i][j]=='F'||MAP[i][j]=='P') break;
 		}
-		sleep(1);
+		
 	}
 }
 
@@ -220,8 +234,7 @@ int main()
 	horizonset(MAP,line);
 	print(MAP,line);
 	start(MAP,line);
-	
-	
+
 	
 	for (int k = 0; k < 22; k++)
 	{
