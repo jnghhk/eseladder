@@ -150,7 +150,7 @@ void printmap(int **MAP,int line)
 {
 	char buf[128]={0,};
 	int i, j;
-	for (i = 0; i < 22; i++)
+	for (i = 0; i < 21; i++)
 	{
 		for (j = 0; j < line-1; j++)
 		{
@@ -173,12 +173,14 @@ void start(int **MAP,int line)
 {
 	int i=0;
 	int j,l;
+	int player;
 //	gotoxy(0,2);//
 	for(l=0;l<line-1;l+=2)
 	{
 		i=1;
 		j=l;
 		startprint(l,i-1,j,MAP);
+		player=MAP[i-1][j];
 		while(1)
 		{			
 			startprint(l,i,j,MAP);
@@ -197,7 +199,19 @@ void start(int **MAP,int line)
 				startprint(l,i,j,MAP);
 			}
 			i++;
-			if(MAP[i][j]=='F'||MAP[i][j]=='P') break;
+			if(MAP[i][j]=='F'||MAP[i][j]=='P')
+			{
+				gotoxy(20,5+l);
+				if(MAP[i][j]=='F')
+				{
+					printf("player:%c FAIL",player);
+				}
+				else
+				{
+					printf("player:%c PASS",player);
+				}
+				break;	
+			}
 		}
 			startprint(l,i,j,MAP);
 		
@@ -214,7 +228,7 @@ int main()
 	system("clear");
 	printf("인원수:");
 	scanf("%d", &line);
-	while(line<1 || line>10)
+	while(line<=1 || line>10)
 	{
 		printf("인원수는 최소 2,최대 10명입니다.");
 		printf("인원수:");
