@@ -1,7 +1,6 @@
 main: main.o
-	gcc -o main -L../funcs main.o -lfuncs
-
+	gcc -o ladder -L../funcs main.o -lfuncs
 main.o: main.c
-	gcc -g -c I../hfiles main.c -o main.o
+	gcc -g -c -I../hfiles main.c -o main.o
 clean:
-	rm *.o main	
+	rm *.o ladder	
