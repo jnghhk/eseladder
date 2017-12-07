@@ -69,12 +69,14 @@ void start(int **MAP,int line)
 {
 	int i=0;
 	int j,l;
+	int player;
 //	gotoxy(0,2);//
 	for(l=0;l<line-1;l+=2)
 	{
 		i=1;
 		j=l;
 		startprint(l,i-1,j,MAP);
+		player=MAP[i-1][j];
 		while(1)
 		{			
 			startprint(l,i,j,MAP);
@@ -93,7 +95,20 @@ void start(int **MAP,int line)
 				startprint(l,i,j,MAP);
 			}
 			i++;
-			if(MAP[i][j]=='F'||MAP[i][j]=='P') break;
+			if(MAP[i][j]=='F'||MAP[i][j]=='P')
+			{
+				gotoxy(20,5+l);
+				if(MAP[i][j]=='F')
+				{
+					
+					printf("player:%c FAIL",player);
+				}
+				else
+				{
+					printf("player:%c PASS",player);
+				}
+				break;	
+			}
 		}
 			startprint(l,i,j,MAP);
 		
